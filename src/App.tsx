@@ -24,17 +24,12 @@ const initialState = [
 ]
 
 const [userName, setUserName] = useState(localStorage['userName'] ? (JSON.parse(localStorage.getItem('userName') || '')) : '')
-// const [columnTitles, setColumnTitles] = useState(JSON.parse(localStorage.getItem('columnTitles') || JSON.stringify(['TODO', 'In progress', 'Testing', 'Done'])))
 const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns') || JSON.stringify(initialState)))
-// const [cards, setCards] = useState([])
 
   useEffect(() => {
     localStorage.setItem('userName', JSON.stringify(userName))
   }, [userName]);
 
-  // useEffect(() => {
-  //   localStorage.setItem('columnTitles', JSON.stringify(columnTitles))
-  // }, [columnTitles]);
   useEffect(() => {
     localStorage.setItem('columns', JSON.stringify(columns))
   }, [columns]);
@@ -43,15 +38,9 @@ const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns'
     setUserName(name)
   }
 
-  // const onColumTitleChange = (index:number, title:string) => {
-  //   const newColumnTitles = [...columnTitles]
-  //   newColumnTitles[index] = title
-  //   setColumnTitles(newColumnTitles)
-  // }
-
   const onColumTitleChange = (index:number, title:string) => {
-    const newColumnTitles = [...columns.title]
-    newColumnTitles[index] = title
+    const newColumnTitles = [...columns]
+    newColumnTitles[index].title = title
     setColumns(newColumnTitles)
   }
 
@@ -64,7 +53,7 @@ const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns'
     <div className='App'>
       <div className='container'>
       <div className='card-header'>React Trello Test Task</div>
-       {(!userName && <NameCard onUserNameAdd={onUserNameAdd}/>) || <Board columnTitles={columnTitles} onColumTitleChange={onColumTitleChange}/>}
+       {(!userName && <NameCard onUserNameAdd={onUserNameAdd}/>) || <Board columns={columns} onColumTitleChange={onColumTitleChange}/>}
       </div>
     </div>
   );
