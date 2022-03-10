@@ -39,12 +39,17 @@ const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns'
   }
 
   const onColumTitleChange = (index:number, title:string) => {
-    const newColumnTitles = [...columns]
-    newColumnTitles[index].title = title
-    setColumns(newColumnTitles)
+    const newColumns = [...columns]
+    newColumns[index].title = title
+    setColumns(newColumns)
   }
 
-  const addCard = () => {}
+  const addCard = (index:number, text:string) => {
+    const newColumns = [...columns]
+    newColumns[index].cards.push(text)
+    setColumns(newColumns)
+  }
+
   const editCard = () => {}
   const deleteCard = () => {}
   const addCommnetToCard = () => {}
@@ -53,7 +58,7 @@ const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns'
     <div className='App'>
       <div className='container'>
       <div className='card-header'>React Trello Test Task</div>
-       {(!userName && <NameCard onUserNameAdd={onUserNameAdd}/>) || <Board columns={columns} onColumTitleChange={onColumTitleChange}/>}
+       {(!userName && <NameCard onUserNameAdd={onUserNameAdd}/>) || <Board columns={columns} onColumTitleChange={onColumTitleChange} addCard={addCard}/>}
       </div>
     </div>
   );
