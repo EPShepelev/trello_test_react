@@ -44,9 +44,9 @@ const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns'
     setColumns(newColumns)
   }
 
-  const addCard = (index:number, text:string) => {
+  const addCard = (index:number, title:string) => {
     const newColumns = [...columns]
-    newColumns[index].cards.push(text)
+    newColumns[index].cards.push(title)
     setColumns(newColumns)
   }
 
@@ -57,7 +57,7 @@ const [columns, setColumns] = useState(JSON.parse(localStorage.getItem('columns'
   return (
     <div className='App'>
       <div className='container'>
-      <div className='card-header'>React Trello Test Task</div>
+      <div className='card-header header'>React Trello Test Task</div>
        {(!userName && <NameCard onUserNameAdd={onUserNameAdd}/>) || <Board columns={columns} onColumTitleChange={onColumTitleChange} addCard={addCard}/>}
       </div>
     </div>

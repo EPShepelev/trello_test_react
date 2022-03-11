@@ -1,0 +1,19 @@
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 5;
+  padding-top: 85px;
+  background-color: rgba(222, 211, 211, 0.7);
+}
+.form {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(56, 201, 124, 1);
+}
+
+.close {
+  text-align: end;
+}
