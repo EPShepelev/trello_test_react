@@ -1,0 +1,7 @@
+.inner {
+  width: 100%;
+  text-align: left;
+}
+.card {
+  cursor: pointer;
+}
