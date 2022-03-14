@@ -16,20 +16,18 @@ export const EditCard: React.FC<{
   listIndex,
   title,
   text,
-  comments,
   author,
   onCloseBtnHandle,
   handleKeypress,
 }) => {
   return (
     <div className={styles.overlay}>
-      <div className="modal-dialog">
+      <div className={`modal-dialog ${styles.content}`}>
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">
-              <input type="text" placeholder={title} />
+            <h5 className="modal-title w-100 me-2">
+              <input className={`modal-title w-100 ${styles.title}`} type="text" placeholder={title} />
             </h5>
-
             <button
               type="button"
               className="btn-close"
@@ -38,11 +36,10 @@ export const EditCard: React.FC<{
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
-            <textarea placeholder={text}></textarea>
+          <div className="modal-body w-100 me-2">
+            <textarea className={`${styles.text}`} placeholder={text}></textarea>
           </div>
           <div className="modal-footer">
-            <p className="modal-text">Comments: {comments}</p>
             <button type="button" className="btn btn-success me-2">
               OK
             </button>
