@@ -10,7 +10,9 @@ export type CardType = {
   author: string;
   deleteCard: Function;
   editCard: Function;
-  addCommnet: Function
+  addComment: Function;
+  editComment: Function;
+  deleteComment: Function;
   listIndex: number;
 };
 
@@ -22,8 +24,10 @@ export const List: React.FC<{
   addCard: Function;
   deleteCard: Function;
   editCard: Function;
-  addCommnet: Function
-}> = ({ title, listIndex, cards, onColumTitleChange, addCard, deleteCard, editCard, addCommnet }) => {
+  addComment: Function;
+  editComment: Function;
+  deleteComment: Function;
+}> = ({ title, listIndex, cards, onColumTitleChange, addCard, deleteCard, editCard, addComment, editComment, deleteComment }) => {
   const [isTitleEdit, setIsTitleEdit] = useState(false);
   const [inputTitle, setInputTitle] = useState(title);
   const [isCardEdit, setIsCardEdit] = useState(false);
@@ -109,7 +113,9 @@ export const List: React.FC<{
                     author={card.author}
                     listIndex={listIndex}
                     editCard={editCard}
-                    addCommnet={addCommnet}
+                    addComment={addComment}
+                    editComment={editComment}
+                    deleteComment={deleteComment}
                   />
                 </div>
               );

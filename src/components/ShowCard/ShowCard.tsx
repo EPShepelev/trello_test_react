@@ -12,7 +12,9 @@ export const ShowCard: React.FC<{
   onCloseBtnHandle: Function;
   handleKeypress: Function;
   onEditBtnHandle: Function;
-  addCommnet: Function;
+  addComment: Function;
+  editComment: Function;
+  deleteComment: Function;
 }> = ({
   id,
   listIndex,
@@ -24,7 +26,9 @@ export const ShowCard: React.FC<{
   onCloseBtnHandle,
   handleKeypress,
   onEditBtnHandle,
-  addCommnet
+  addComment,
+  editComment,
+  deleteComment
 }) => {
   return (
     <div className={styles.overlay}>
@@ -47,7 +51,7 @@ export const ShowCard: React.FC<{
             <p className="modal-text">{text}</p>
             <div>
               <p className="modal-text mb-0">Comments:</p>
-              <Comments comments={comments} addCommnet={addCommnet} id={id} listIndex={listIndex} />
+              <Comments comments={comments} addComment={addComment} id={id} listIndex={listIndex} editComment={editComment}deleteComment={deleteComment} />
             </div>
           </div>
           <div className="modal-footer">

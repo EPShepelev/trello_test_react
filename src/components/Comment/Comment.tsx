@@ -1,14 +1,33 @@
-export const Comment: React.FC<{comment: any}> = ({comment}) => {
+import { useState } from "react";
+
+export const Comment: React.FC<{comment: any, editComment: Function, deleteComment: Function, id: string, listIndex: number}> = ({comment,  id, listIndex, editComment, deleteComment}) => {
+
+  const [commentTextValue, setCommentTextValue] = useState(comment.text)
+  const [isCommentChange, setIsCommentChange] = useState(false)
+
+  const onInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    clb: Function
+  ) => {
+    clb(e.target.value);
+  };
+
+  const onEditDoneHandle = ( e: React.MouseEvent<HTMLButtonElement>, id: string, commentId: string, listIndex: number, text: string) => {
+    setIsCommentChange(!isCommentChange)
+    editComment(id, commentId, listIndex, text)
+  }
+
   return (
     <div className="d-flex mt-2 justify-content-between align-items-center">
       <div>
-        <div>{comment.text}</div>
+        {!isCommentChange ? (<div>{comment.text}</div>) : (<input type="text" value={commentTextValue} onChange={(e) => {onInputChange(e, setCommentTextValue);}}/>)}
         <div className="text-muted">{comment.author}</div>
       </div>
       <div>
       <button
               type="button"
               className="btn btn-success me-2"
+              onClick={(e) =>  onEditDoneHandle(e, id, comment.commentId, listIndex, commentTextValue)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +56,6 @@ export const Comment: React.FC<{comment: any}> = ({comment}) => {
               </svg>
             </button>
       </div>
-      
     </div>
   );
 };

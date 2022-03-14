@@ -12,7 +12,9 @@ export const CardItem: React.FC<CardType> = ({
   listIndex,
   deleteCard,
   editCard,
-  addCommnet
+  addComment,
+  editComment,
+  deleteComment
 }) => {
   const [isCardShow, setIsCardShow] = useState(false);
 
@@ -43,7 +45,9 @@ export const CardItem: React.FC<CardType> = ({
           comments={comments}
           author={author}
           editCard={editCard}
-          addCommnet={addCommnet}
+          addComment={addComment}
+          editComment={editComment}
+          deleteComment={deleteComment}
         />
       )}
     </>

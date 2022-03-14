@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import {CommentsList} from '../CommentsList/CommentsList'
 
-export const Comments: React.FC<{comments:Array<object>, addCommnet: Function, id: string, listIndex: number}> = ({comments, addCommnet, id, listIndex}) => {
+export const Comments: React.FC<{comments:Array<object>, addComment: Function, id: string, listIndex: number, editComment: Function
+  deleteComment: Function;}> = ({comments, addComment, id, listIndex, editComment, deleteComment}) => {
 
   const [commentTextValue, setCommentTextValue] = useState("")
 
@@ -12,7 +13,7 @@ export const Comments: React.FC<{comments:Array<object>, addCommnet: Function, i
   };
 
   const onAddBtnClick = (id: string, listIndex: number, text: string) => {
-    addCommnet(id, listIndex, text)
+    addComment(id, listIndex, text)
   }
 
   return (
@@ -38,7 +39,7 @@ export const Comments: React.FC<{comments:Array<object>, addCommnet: Function, i
             </svg>
           </button>
     </div>
-    <CommentsList  comments={comments} />
+    <CommentsList  comments={comments} editComment={editComment} deleteComment={deleteComment}  id={id} listIndex={listIndex} />
     </>
   );
 };

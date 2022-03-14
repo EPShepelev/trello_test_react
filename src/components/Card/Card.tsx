@@ -13,7 +13,9 @@ export const Card: React.FC<{
   author: string;
   onCardClickHandle: Function;
   editCard: Function;
-  addCommnet: Function;
+  addComment: Function;
+  editComment: Function;
+  deleteComment: Function;
 }> = ({
   id,
   listIndex,
@@ -24,7 +26,9 @@ export const Card: React.FC<{
   author,
   onCardClickHandle,
   editCard,
-  addCommnet
+  addComment,
+  editComment,
+  deleteComment
 }) => {
   const [isCardEdit, setIsCardEdit] = useState(false);
 
@@ -75,7 +79,9 @@ export const Card: React.FC<{
           onCloseBtnHandle={onCloseBtnHandle}
           handleKeypress={handleKeypress}
           onEditBtnHandle={onEditBtnHandle}
-          addCommnet={addCommnet}
+          addComment={addComment}
+          editComment={editComment}
+          deleteComment={deleteComment}
         />
       )}
     </>

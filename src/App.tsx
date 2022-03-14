@@ -79,7 +79,7 @@ function App() {
     setColumns(newColumns)
   };
 
-  const addCommnet = (id: string, listIndex: number, text: string) => {
+  const addComment = (id: string, listIndex: number, text: string) => {
     const newColumns = [...columns];
     const newCommnet = {
       commentId: uuidv4(),
@@ -90,14 +90,14 @@ function App() {
     editedCard.comments.push(newCommnet)
     setColumns(newColumns)
   };
-  const editCommnet = (id: string, commentId: string, listIndex: number, text: string) => {
+  const editComment = (id: string, commentId: string, listIndex: number, text: string) => {
     const newColumns = [...columns];
     const editedCard = newColumns[listIndex].cards.find((card: any) => card.id === id)
     const editedComment = editedCard.comments.find((comment: any) => comment.commentId === commentId)
     editedComment.text = text
     setColumns(newColumns)
   };
-  const deleteCommnet = (id: string, commentId: string, listIndex: number) => {
+  const deleteComment = (id: string, commentId: string, listIndex: number) => {
     const newColumns = [...columns];
     const editedCard = newColumns[listIndex].cards.find((card: any) => card.id === id)
     const newCommets = editedCard.comments.filter((comment: any) => comment.commentId !== commentId)
@@ -116,7 +116,9 @@ function App() {
             addCard={addCard}
             deleteCard={deleteCard}
             editCard={editCard}
-            addCommnet={addCommnet}
+            addComment={addComment}
+            editComment={editComment}
+            deleteComment={deleteComment}
           />
         )}
       </div>
