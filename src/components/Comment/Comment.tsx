@@ -17,6 +17,10 @@ export const Comment: React.FC<{comment: any, editComment: Function, deleteComme
     editComment(id, commentId, listIndex, text)
   }
 
+  const onDeleteHandle = ( e: React.MouseEvent<HTMLButtonElement>, id: string, commentId: string, listIndex: number) => {
+    deleteComment(id, commentId, listIndex)
+  }
+
   return (
     <div className="d-flex mt-2 justify-content-between align-items-center">
       <div>
@@ -43,6 +47,7 @@ export const Comment: React.FC<{comment: any, editComment: Function, deleteComme
             <button
               type="button"
               className="btn btn-danger"
+              onClick={(e)=>onDeleteHandle(e, id, comment.commentId, listIndex)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
