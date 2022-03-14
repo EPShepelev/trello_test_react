@@ -6,7 +6,8 @@ export const Board: React.FC<{
   addCard: Function;
   deleteCard: Function;
   editCard: Function;
-}> = ({ columns, onColumTitleChange, addCard, deleteCard, editCard }) => {
+  addCommnet: Function;
+}> = ({ columns, onColumTitleChange, addCard, deleteCard, editCard, addCommnet }) => {
   return (
     <div className="row align-items-start">
       {columns &&
@@ -21,6 +22,7 @@ export const Board: React.FC<{
               addCard={addCard}
               deleteCard={deleteCard}
               editCard={editCard}
+              addCommnet={addCommnet}
             />
           );
         })}

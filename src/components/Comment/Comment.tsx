@@ -1,60 +1,11 @@
-import styles from "./ShowCard.module.css";
-import {Comments} from '../Comments/Comments'
-
-export const ShowCard: React.FC<{
-  id: string;
-  listIndex: number;
-  title: string;
-  text: string;
-  comments: any;
-  author: string;
-  onDeleteClickHandle: Function;
-  onCloseBtnHandle: Function;
-  handleKeypress: Function;
-  onEditBtnHandle: Function;
-  addCommnet: Function;
-}> = ({
-  id,
-  listIndex,
-  title,
-  text,
-  comments,
-  author,
-  onDeleteClickHandle,
-  onCloseBtnHandle,
-  handleKeypress,
-  onEditBtnHandle,
-  addCommnet
-}) => {
+export const Comment: React.FC<{comment: any}> = ({comment}) => {
   return (
-    <div className={styles.overlay}>
-      <div className={`modal-dialog ${styles.content}`}>
-        <div className="modal-content">
-          <div className="modal-header">
-            <div>
-              <h5 className="modal-title">{title}</h5>
-              <h6 className="modal-subtitle text-muted">{author}</h6>
-            </div>
-            <button
-              type="button"
-              className="btn-close"
-              onClick={() => onCloseBtnHandle()}
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">
-            <p className="modal-text">{text}</p>
-            <div>
-              <p className="modal-text mb-0">Comments:</p>
-              <Comments comments={comments} addCommnet={addCommnet} id={id} listIndex={listIndex} />
-            </div>
-          </div>
-          <div className="modal-footer">
-            <button
+    <div>
+      <div>{comment.text}</div>
+      <div>{comment.author}</div>
+      <button
               type="button"
               className="btn btn-success me-2"
-              onClick={() => onEditBtnHandle()}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +21,6 @@ export const ShowCard: React.FC<{
             <button
               type="button"
               className="btn btn-danger"
-              onClick={() => onDeleteClickHandle(id, listIndex)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,9 +33,6 @@ export const ShowCard: React.FC<{
                 <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
               </svg>
             </button>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
