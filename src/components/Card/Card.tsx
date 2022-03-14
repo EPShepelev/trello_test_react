@@ -7,6 +7,7 @@ export const Card: React.FC<{
   listIndex: number;
   deleteCard: Function;
   title: string;
+  listTitle: string;
   text: string;
   comments: any;
   author: string;
@@ -20,6 +21,7 @@ export const Card: React.FC<{
   listIndex,
   deleteCard,
   title,
+  listTitle,
   text,
   comments,
   author,
@@ -71,6 +73,7 @@ export const Card: React.FC<{
           id={id}
           listIndex={listIndex}
           title={title}
+          listTitle={listTitle}
           text={text}
           comments={comments}
           author={author}

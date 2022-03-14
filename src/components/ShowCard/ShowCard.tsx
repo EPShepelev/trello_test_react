@@ -5,6 +5,7 @@ export const ShowCard: React.FC<{
   id: string;
   listIndex: number;
   title: string;
+  listTitle: string;
   text: string;
   comments: any;
   author: string;
@@ -19,6 +20,7 @@ export const ShowCard: React.FC<{
   id,
   listIndex,
   title,
+  listTitle,
   text,
   comments,
   author,
@@ -36,7 +38,7 @@ export const ShowCard: React.FC<{
         <div className="modal-content">
           <div className="modal-header">
             <div>
-              <h5 className="modal-title">{title}</h5>
+              <h5 className="modal-title">{title} <span className="ms-2">({listTitle})</span></h5>
               <h6 className="modal-subtitle text-muted">{author}</h6>
             </div>
             <button

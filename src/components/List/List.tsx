@@ -14,6 +14,7 @@ export type CardType = {
   editComment: Function;
   deleteComment: Function;
   listIndex: number;
+  listTitle: string;
 };
 
 export const List: React.FC<{
@@ -116,6 +117,7 @@ export const List: React.FC<{
                     addComment={addComment}
                     editComment={editComment}
                     deleteComment={deleteComment}
+                    listTitle={inputTitle}
                   />
                 </div>
               );
