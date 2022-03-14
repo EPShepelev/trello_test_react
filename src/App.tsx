@@ -71,10 +71,18 @@ function App() {
     );
     setColumns(newColumns);
   };
-  const editCard = () => {};
-  const addCommnetToCard = () => {};
+  const editCard = (id: string, listIndex: number, title: string, text: string) => {
+    const newColumns = [...columns];
+    const editedCard = newColumns[listIndex].cards.find((card: any) => card.id === id)
+    editedCard.title = title
+    editedCard.text = text
+    setColumns(newColumns);
+  };
+
+
+  const addCommnet = () => {};
   const editCommnet = () => {};
-  const deleteCommnetFromCard = () => {};
+  const deleteCommnet = () => {};
 
   return (
     <div className="App">
@@ -86,6 +94,7 @@ function App() {
             onColumTitleChange={onColumTitleChange}
             addCard={addCard}
             deleteCard={deleteCard}
+            editCard={editCard}
           />
         )}
       </div>
