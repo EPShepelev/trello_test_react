@@ -1,4 +1,3 @@
-import styles from "./Card.module.css";
 import { useState } from "react";
 import { ShowCard } from "../ShowCard/ShowCard";
 import { EditCard } from "../EditCard/EditCard";
