@@ -63,6 +63,7 @@ export const EditCard: React.FC<{
             }}/>
           </div>
           <div className="modal-footer">
+            <p className="text-muted">Change text and press OK to save</p>
             <button type="button" className="btn btn-success me-2" onClick={(e) => onEditDoneClickhandle(e, id, listIndex, titleValue, textValue)}>
               OK
             </button>
