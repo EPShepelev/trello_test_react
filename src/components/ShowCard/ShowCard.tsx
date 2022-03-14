@@ -25,11 +25,13 @@ export const ShowCard: React.FC<{
 }) => {
   return (
     <div className={styles.overlay}>
-      <div className="modal-dialog">
+      <div className={`modal-dialog ${styles.content}`}>
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">{title}</h5>
-            <h6 className="modal-subtitle text-muted">{author}</h6>
+            <div>
+              <h5 className="modal-title">{title}</h5>
+              <h6 className="modal-subtitle text-muted">{author}</h6>
+            </div>
             <button
               type="button"
               className="btn-close"
@@ -40,9 +42,9 @@ export const ShowCard: React.FC<{
           </div>
           <div className="modal-body">
             <p className="modal-text">{text}</p>
+            <p className="modal-text">Comments: {comments}</p>
           </div>
           <div className="modal-footer">
-            <p className="modal-text">Comments: {comments}</p>
             <button
               type="button"
               className="btn btn-success me-2"
