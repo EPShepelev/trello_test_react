@@ -29,27 +29,35 @@ export const List: React.FC<{
   editComment: Function;
   deleteComment: Function;
 }> = ({ title, listIndex, cards, onColumTitleChange, addCard, deleteCard, editCard, addComment, editComment, deleteComment }) => {
-  const [isTitleEdit, setIsTitleEdit] = useState(false);
   const [inputTitle, setInputTitle] = useState(title);
+  const [isTitleEdit, setIsTitleEdit] = useState(false);
   const [isCardEdit, setIsCardEdit] = useState(false);
 
   const editBtnClick = (index: number, inputTitle: string) => {
-    setIsTitleEdit(!isTitleEdit);
+    setIsTitleEdit(!isTitleEdit)
     if (isTitleEdit) {
-      onColumTitleChange(index, inputTitle);
+      onColumTitleChange(index, inputTitle)
     }
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputTitle(e.target.value);
+    setInputTitle(e.target.value)
   };
 
   const onAddCardBtnClick = () => {
-    setIsCardEdit(!isCardEdit);
+    setIsCardEdit(!isCardEdit)
   };
 
   const onCloseBtnClick = () => {
-    setIsCardEdit(!isCardEdit);
+    setIsCardEdit(!isCardEdit)
+  };
+
+  const handleKeypress = (e: React.KeyboardEvent, index: number, inputTitle: string) => {
+    if (e.key === "Enter") {
+      setInputTitle(inputTitle)
+      editBtnClick(index, inputTitle)
+      setIsTitleEdit(!isTitleEdit)
+    }
   };
 
   return (
@@ -62,6 +70,7 @@ export const List: React.FC<{
               className="form-control"
               value={inputTitle}
               onChange={(e) => onInputChange(e)}
+              onKeyPress={(e) => handleKeypress(e, listIndex, inputTitle)}
             />
           ) : (
             <h4 className="me-2">{inputTitle}</h4>
