@@ -11,7 +11,7 @@ export const Board: React.FC<{
   deleteComment: Function;
 }> = ({ columns, onColumTitleChange, addCard, deleteCard, editCard, addComment,editComment, deleteComment}) => {
   return (
-    <div className="row align-items-start">
+    <div className="row flex-lg-row flex-md-column flex-sm-column flex-column align-items-start">
       {columns &&
         columns.map((column, index) => {
           return (
