@@ -1,5 +1,5 @@
 import styles from "./FormCard.module.css";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 export const FormCard: React.FC<{
   onCloseBtnClick: Function;
@@ -36,6 +36,19 @@ export const FormCard: React.FC<{
       addCard(listIndex, titleValue, textValue);
     }
   };
+
+  const escFunction = useCallback((e) => {
+    if (e.key === "Escape") {
+      onCloseBtnClick()
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
 
   return (
     <div className={styles.modal}>
