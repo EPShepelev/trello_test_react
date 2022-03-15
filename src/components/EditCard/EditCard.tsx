@@ -1,30 +1,23 @@
+import { useState, FC } from "react";
+import { ICard } from "../../types/types";
 import styles from "./EditCard.module.css";
-import { useState } from "react";
 
-export const EditCard: React.FC<{
-  id: string;
-  listIndex: number;
-  title: string;
-  text: string;
-  comments: any;
-  author: string;
-  onDeleteClickHandle: Function;
-  onCloseBtnHandle: Function;
-  handleKeypress: Function;
-  onEditBtnHandle: Function;
-  editCard: Function
-}> = ({
-  id,
+interface EditCardProps {
+  listIndex: number
+  card: ICard
+  editCard (listIndex: number, id: string, title: string, text: string): void
+  onCloseBtnHandle (): void
+  onEditBtnHandle (): void
+}
+
+export const EditCard: React.FC<EditCardProps> = ({
   listIndex,
-  title,
-  text,
-  author,
+  card,
   onCloseBtnHandle,
-  handleKeypress,
   editCard
 }) => {
-  const [titleValue, setTitleValue] = useState(title);
-  const [textValue, setTextValue] = useState(text);
+  const [titleValue, setTitleValue] = useState(card.title);
+  const [textValue, setTextValue] = useState(card.text);
 
   const onInputChange = (
     e:
@@ -35,8 +28,8 @@ export const EditCard: React.FC<{
     clb(e.target.value);
   };
 
-  const onEditDoneClickhandle = ( e: React.MouseEvent<HTMLButtonElement>, id: string, listIndex: number, titleValue: string, textValue: string) => {
-    editCard(id, listIndex, titleValue, textValue)
+  const onEditDoneClickhandle = ( e: React.MouseEvent<HTMLButtonElement>, listIndex: number, id: string, titleValue: string, textValue: string) => {
+    editCard(listIndex, id, titleValue, textValue)
     onCloseBtnHandle()
   }
   return (
@@ -64,7 +57,7 @@ export const EditCard: React.FC<{
           </div>
           <div className="modal-footer">
             <p className="text-muted">Change text and press OK to save</p>
-            <button type="button" className="btn btn-success me-2" onClick={(e) => onEditDoneClickhandle(e, id, listIndex, titleValue, textValue)}>
+            <button type="button" className="btn btn-success me-2" onClick={(e) => onEditDoneClickhandle(e, listIndex, card.id, titleValue, textValue)}>
               OK
             </button>
           </div>

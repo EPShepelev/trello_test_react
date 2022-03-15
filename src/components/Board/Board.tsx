@@ -1,15 +1,19 @@
+import { FC } from "react";
+import {  ICloumn } from "../../types/types";
 import { List } from "../List/List";
 
-export const Board: React.FC<{
-  columns: Array<{ title: string; cards: any }>;
-  onColumTitleChange: Function;
-  addCard: Function;
-  deleteCard: Function;
-  editCard: Function;
-  addComment: Function;
-  editComment: Function;
-  deleteComment: Function;
-}> = ({ columns, onColumTitleChange, addCard, deleteCard, editCard, addComment,editComment, deleteComment}) => {
+interface BoardProps {
+  columns: ICloumn[]
+  onColumTitleChange (index: number, title: string): void
+  addCard (index: number, title: string, text: string): void
+  editCard (listIndex: number, id: string, title: string, text: string): void
+  deleteCard (listIndex: number, id: string): void
+  addComment (listIndex: number, id: string, text: string): void
+  editComment (listIndex: number, id: string, commentId: string,text: string): void
+  deleteComment (listIndex: number, id: string, commentId: string): void
+}
+
+export const Board: FC<BoardProps> = ({ columns, onColumTitleChange, addCard,  editCard, deleteCard, addComment, editComment, deleteComment}) => {
   return (
     <div className="row flex-lg-row flex-md-column flex-sm-column flex-column align-items-start">
       {columns &&
@@ -18,7 +22,7 @@ export const Board: React.FC<{
             <List
               key={index}
               listIndex={index}
-              title={column.title}
+              listTitle={column.listTitle}
               cards={column.cards}
               onColumTitleChange={onColumTitleChange}
               addCard={addCard}

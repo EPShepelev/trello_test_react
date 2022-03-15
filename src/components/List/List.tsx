@@ -1,35 +1,24 @@
-import { useState } from "react";
+import { useState, FC } from "react";
+import { ICard } from "../../types/types";
 import { FormCard } from "../FormCard/FormCard";
 import { CardItem } from "../CardItem/CardItem";
 
-export type CardType = {
-  id: string;
-  title: string;
-  text: string;
-  comments: Array<string | null>;
-  author: string;
-  deleteCard: Function;
-  editCard: Function;
-  addComment: Function;
-  editComment: Function;
-  deleteComment: Function;
-  listIndex: number;
-  listTitle: string;
-};
+interface ListProps {
+  listIndex: number
+  listTitle: string
+  cards: ICard[]
+  onColumTitleChange (index: number, title: string): void
+  addCard (index: number, title: string, text: string): void
+  editCard (listIndex: number, id: string, title: string, text: string): void
+  deleteCard (listIndex: number, id: string): void
+  addComment (listIndex: number, id: string, text: string): void
+  editComment (listIndex: number, id: string, commentId: string,text: string): void
+  deleteComment (listIndex: number, id: string, commentId: string): void
+}
 
-export const List: React.FC<{
-  title: string;
-  listIndex: number;
-  cards: any;
-  onColumTitleChange: Function;
-  addCard: Function;
-  deleteCard: Function;
-  editCard: Function;
-  addComment: Function;
-  editComment: Function;
-  deleteComment: Function;
-}> = ({ title, listIndex, cards, onColumTitleChange, addCard, deleteCard, editCard, addComment, editComment, deleteComment }) => {
-  const [inputTitle, setInputTitle] = useState(title);
+export const List: FC<ListProps> = ({ listIndex, listTitle, cards, onColumTitleChange, addCard, deleteCard, editCard, addComment, editComment, deleteComment }) => {
+
+  const [inputTitle, setInputTitle] = useState(listTitle);
   const [isTitleEdit, setIsTitleEdit] = useState(false);
   const [isCardEdit, setIsCardEdit] = useState(false);
 
@@ -111,22 +100,18 @@ export const List: React.FC<{
         </div>
         <div className="mt-2">
           {cards &&
-            cards.map((card: any, index: number) => {
+            cards.map((card, index) => {
               return (
                 <div key={index} className="align-self-start">
                   <CardItem
-                    id={card.id}
-                    deleteCard={deleteCard}
-                    title={card.title}
-                    text={card.text}
-                    comments={card.comments}
-                    author={card.author}
                     listIndex={listIndex}
+                    listTitle={inputTitle}
+                    card={card}
                     editCard={editCard}
+                    deleteCard={deleteCard}
                     addComment={addComment}
                     editComment={editComment}
                     deleteComment={deleteComment}
-                    listTitle={inputTitle}
                   />
                 </div>
               );
@@ -136,9 +121,9 @@ export const List: React.FC<{
       {isCardEdit && (
         <FormCard
           listIndex={listIndex}
+          isCardEdit={isCardEdit}
           onCloseBtnClick={onCloseBtnClick}
           addCard={addCard}
-          isCardEdit={isCardEdit}
           setIsCardEdit={setIsCardEdit}
         />
       )}

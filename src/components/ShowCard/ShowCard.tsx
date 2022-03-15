@@ -1,33 +1,28 @@
-import styles from "./ShowCard.module.css";
+import { useCallback, useEffect, FC } from "react";
+import { ICard } from "../../types/types";
 import {Comments} from '../Comments/Comments'
-import { useCallback, useEffect } from "react";
+import styles from "./ShowCard.module.css";
 
-export const ShowCard: React.FC<{
-  id: string;
-  listIndex: number;
-  title: string;
-  listTitle: string;
-  text: string;
-  comments: any;
-  author: string;
-  onDeleteClickHandle: Function;
-  onCloseBtnHandle: Function;
-  handleKeypress: Function;
-  onEditBtnHandle: Function;
-  addComment: Function;
-  editComment: Function;
-  deleteComment: Function;
-}> = ({
-  id,
+interface ShowCardProps {
+  listIndex: number
+  listTitle: string
+  card: ICard
+  onCloseBtnHandle (): void
+  onEditBtnHandle (): void
+  onDeleteClickHandle (listIndex: number, id: string): void
+  addComment (listIndex: number, id: string, text: string): void
+  deleteComment (listIndex: number, id: string, commentId: string): void
+  editComment (listIndex: number, id: string, commentId: string,text: string): void
+}
+
+
+export const ShowCard: FC<ShowCardProps> = ({
   listIndex,
-  title,
   listTitle,
-  text,
-  comments,
-  author,
-  onDeleteClickHandle,
+  card,
   onCloseBtnHandle,
   onEditBtnHandle,
+  onDeleteClickHandle,
   addComment,
   editComment,
   deleteComment
@@ -52,8 +47,8 @@ export const ShowCard: React.FC<{
         <div className="modal-content">
           <div className="modal-header">
             <div>
-              <h5 className="modal-title">{title} <span className="ms-2">({listTitle})</span></h5>
-              <h6 className="modal-subtitle text-muted">{author}</h6>
+              <h5 className="modal-title">{card.title} <span className="ms-2">({listTitle})</span></h5>
+              <h6 className="modal-subtitle text-muted">{card.author}</h6>
             </div>
             <button
               type="button"
@@ -64,10 +59,10 @@ export const ShowCard: React.FC<{
             ></button>
           </div>
           <div className="modal-body">
-            <p className="modal-text">{text}</p>
+            <p className="modal-text">{card.text}</p>
             <div>
               <p className="modal-text mb-0">Comments:</p>
-              <Comments comments={comments} addComment={addComment} id={id} listIndex={listIndex} editComment={editComment}deleteComment={deleteComment} />
+              <Comments comments={card.comments} addComment={addComment} id={card.id} listIndex={listIndex} editComment={editComment}deleteComment={deleteComment} />
             </div>
           </div>
           <div className="modal-footer">
@@ -90,7 +85,7 @@ export const ShowCard: React.FC<{
             <button
               type="button"
               className="btn btn-danger"
-              onClick={() => onDeleteClickHandle(id, listIndex)}
+              onClick={() => onDeleteClickHandle(listIndex, card.id)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

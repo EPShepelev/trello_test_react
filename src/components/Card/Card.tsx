@@ -1,86 +1,64 @@
-import { useState } from "react";
+import { useState, FC } from "react";
+import { ICard } from "../../types/types";
 import { ShowCard } from "../ShowCard/ShowCard";
 import { EditCard } from "../EditCard/EditCard";
 
-export const Card: React.FC<{
-  id: string;
-  listIndex: number;
-  deleteCard: Function;
-  title: string;
-  listTitle: string;
-  text: string;
-  comments: any;
-  author: string;
-  onCardClickHandle: Function;
-  editCard: Function;
-  addComment: Function;
-  editComment: Function;
-  deleteComment: Function;
-}> = ({
-  id,
+interface CardProps {
+  listIndex: number
+  listTitle: string
+  card: ICard
+  onCardClickHandle (): void
+  editCard (listIndex: number, id: string, title: string, text: string): void
+  deleteCard (listIndex: number, id: string): void
+  addComment (listIndex: number, id: string, text: string): void
+  deleteComment (listIndex: number, id: string, commentId: string): void
+  editComment (listIndex: number, id: string, commentId: string,text: string): void
+}
+
+export const Card: FC<CardProps> = ({
   listIndex,
-  deleteCard,
-  title,
   listTitle,
-  text,
-  comments,
-  author,
+  card,
   onCardClickHandle,
   editCard,
+  deleteCard,
   addComment,
   editComment,
   deleteComment
 }) => {
   const [isCardEdit, setIsCardEdit] = useState(false);
 
-  const onDeleteClickHandle = (id: string, listIndex: number) => {
-    onCardClickHandle();
-    deleteCard(id, listIndex);
-  };
-
   const onCloseBtnHandle = () => {
     onCardClickHandle();
-  };
-
-  const handleKeypress = (e: React.KeyboardEvent) => {
-    if (e.key === "Escape") {
-      onCardClickHandle();
-    }
   };
 
   const onEditBtnHandle = () => {
     setIsCardEdit(!isCardEdit);
   };
 
+  const onDeleteClickHandle = (listIndex: number, id: string) => {
+    onCardClickHandle();
+    deleteCard(listIndex, id);
+  };
+
   return (
     <>
       {isCardEdit ? (
         <EditCard
-          id={id}
           listIndex={listIndex}
-          title={title}
-          text={text}
-          comments={comments}
-          author={author}
-          onDeleteClickHandle={onDeleteClickHandle}
+          card={card}
           onCloseBtnHandle={onCloseBtnHandle}
-          handleKeypress={handleKeypress}
-          onEditBtnHandle={onEditBtnHandle}
           editCard={editCard}
+          onEditBtnHandle={onEditBtnHandle}
         />
       ) : (
         <ShowCard
-          id={id}
           listIndex={listIndex}
-          title={title}
           listTitle={listTitle}
-          text={text}
-          comments={comments}
-          author={author}
-          onDeleteClickHandle={onDeleteClickHandle}
+          card={card}
           onCloseBtnHandle={onCloseBtnHandle}
-          handleKeypress={handleKeypress}
           onEditBtnHandle={onEditBtnHandle}
+          onDeleteClickHandle={onDeleteClickHandle}
           addComment={addComment}
           editComment={editComment}
           deleteComment={deleteComment}

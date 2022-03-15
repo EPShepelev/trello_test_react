@@ -1,6 +1,15 @@
-import { useState } from "react";
+import { useState, FC } from "react";
+import { IComment } from "../../types/types";
 
-export const Comment: React.FC<{comment: any, editComment: Function, deleteComment: Function, id: string, listIndex: number}> = ({comment,  id, listIndex, editComment, deleteComment}) => {
+interface CommentProps {
+  listIndex: number
+  id: string //this is card id, need to be renamed??
+  comment: IComment
+  deleteComment (listIndex: number, id: string, commentId: string): void
+  editComment (listIndex: number, id: string, commentId: string, text: string): void
+}
+
+export const Comment: FC<CommentProps> = ({comment, id, listIndex, editComment, deleteComment}) => {
 
   const [commentTextValue, setCommentTextValue] = useState(comment.text || "")
   const [isCommentChange, setIsCommentChange] = useState(false)
@@ -12,26 +21,27 @@ export const Comment: React.FC<{comment: any, editComment: Function, deleteComme
     clb(e.target.value);
   };
 
-  const onEditDoneHandle = ( e: React.MouseEvent<HTMLButtonElement>, id: string, commentId: string, listIndex: number, text: string) => {
+  const onEditDoneHandle = ( e: React.MouseEvent<HTMLButtonElement>, listIndex: number, id: string, commentId: string, text: string) => {
     setIsCommentChange(!isCommentChange)
-    editComment(id, commentId, listIndex, text)
+    editComment(listIndex, id, commentId, text)
   }
 
-  const onDeleteHandle = ( e: React.MouseEvent<HTMLButtonElement>, id: string, commentId: string, listIndex: number) => {
-    deleteComment(id, commentId, listIndex)
+  const onDeleteHandle = ( e: React.MouseEvent<HTMLButtonElement>, listIndex: number, id: string, commentId: string) => {
+    deleteComment( listIndex, id, commentId)
   }
 
   return (
     <div className="d-flex mt-2 justify-content-between align-items-center">
       <div>
-        {!isCommentChange ? (<div>{comment.text}</div>) : (<input type="text" value={commentTextValue} onChange={(e) => {onInputChange(e, setCommentTextValue);}}/>)}
+        {/* may be create separated component? */}
+        {!isCommentChange ? (<div>{comment.text}</div>) : (<input type="text" value={commentTextValue} onChange={(e) => {onInputChange(e, setCommentTextValue)}}/>)}
         <div className="text-muted">{comment.author}</div>
       </div>
       <div>
       <button
               type="button"
               className="btn btn-success me-2"
-              onClick={(e) =>  onEditDoneHandle(e, id, comment.commentId, listIndex, commentTextValue)}
+              onClick={(e) =>  onEditDoneHandle(e, listIndex, id, comment.commentId, commentTextValue)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +57,7 @@ export const Comment: React.FC<{comment: any, editComment: Function, deleteComme
             <button
               type="button"
               className="btn btn-danger"
-              onClick={(e)=>onDeleteHandle(e, id, comment.commentId, listIndex)}
+              onClick={(e)=>onDeleteHandle(e, listIndex, id, comment.commentId)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
