@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export const Comment: React.FC<{comment: any, editComment: Function, deleteComment: Function, id: string, listIndex: number}> = ({comment,  id, listIndex, editComment, deleteComment}) => {
 
-  const [commentTextValue, setCommentTextValue] = useState(comment.text)
+  const [commentTextValue, setCommentTextValue] = useState(comment.text || "")
   const [isCommentChange, setIsCommentChange] = useState(false)
 
   const onInputChange = (

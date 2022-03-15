@@ -14,12 +14,20 @@ export const Comments: React.FC<{comments:Array<object>, addComment: Function, i
 
   const onAddBtnClick = (id: string, listIndex: number, text: string) => {
     addComment(id, listIndex, text)
+    setCommentTextValue("")
   }
+
+  const handleKeypress = (e: React.KeyboardEvent, id: string, listIndex: number, text: string) => {
+    if (e.key === "Enter") {
+      addComment(id, listIndex, text)
+      setCommentTextValue("")
+    }
+  };
 
   return (
     <>
     <div className="d-flex align-items-center">
-     <input className="me-2" type="text" value={commentTextValue} onChange={(e) => {
+     <input className="me-2" type="text" value={commentTextValue}  onKeyPress={(e) => handleKeypress(e, id, listIndex, commentTextValue)} onChange={(e) => {
               onInputChange(e, setCommentTextValue);
             }}/>
      <button
