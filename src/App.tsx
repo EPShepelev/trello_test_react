@@ -7,19 +7,19 @@ import { v4 as uuidv4 } from "uuid";
 function App() {
   const initialState = [
     {
-      title: "TODO",
+      listTitle: "TODO",
       cards: [],
     },
     {
-      title: "In progress",
+      listTitle: "In progress",
       cards: [],
     },
     {
-      title: "Testing",
+      listTitle: "Testing",
       cards: [],
     },
     {
-      title: "Done",
+      listTitle: "Done",
       cards: [],
     },
   ];
@@ -47,7 +47,7 @@ function App() {
 
   const onColumTitleChange = (index: number, title: string) => {
     const newColumns = [...columns];
-    newColumns[index].title = title;
+    newColumns[index].listTitle = title;
     setColumns(newColumns);
   };
 
