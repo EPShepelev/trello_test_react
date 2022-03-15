@@ -1,5 +1,6 @@
 import styles from "./ShowCard.module.css";
 import {Comments} from '../Comments/Comments'
+import { useCallback, useEffect } from "react";
 
 export const ShowCard: React.FC<{
   id: string;
@@ -26,12 +27,25 @@ export const ShowCard: React.FC<{
   author,
   onDeleteClickHandle,
   onCloseBtnHandle,
-  handleKeypress,
   onEditBtnHandle,
   addComment,
   editComment,
   deleteComment
 }) => {
+
+  const escFunction = useCallback((e) => {
+    if (e.key === "Escape") {
+      onCloseBtnHandle()
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
+
   return (
     <div className={styles.overlay}>
       <div className={`modal-dialog ${styles.content}`}>
