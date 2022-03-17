@@ -29,6 +29,7 @@ function App() {
       ? JSON.parse(localStorage.getItem("userName") || "")
       : ""
   );
+
   const [columns, setColumns] = useState(
     JSON.parse(localStorage.getItem("columns") || JSON.stringify(initialState))
   );
@@ -71,6 +72,7 @@ function App() {
     );
     setColumns(newColumns);
   };
+
   const editCard = ( listIndex: number, id: string, title: string, text: string) => {
     const newColumns = [...columns];
     const editedCard = newColumns[listIndex].cards.find((card: any) => card.id === id)
@@ -90,6 +92,7 @@ function App() {
     editedCard.comments.push(newCommnet)
     setColumns(newColumns)
   };
+
   const editComment = ( listIndex: number, id: string, commentId: string, text: string) => {
     const newColumns = [...columns];
     const editedCard = newColumns[listIndex].cards.find((card: any) => card.id === id)
@@ -97,6 +100,7 @@ function App() {
     editedComment.text = text
     setColumns(newColumns)
   };
+
   const deleteComment = ( listIndex: number, id: string, commentId: string) => {
     const newColumns = [...columns];
     const editedCard = newColumns[listIndex].cards.find((card: any) => card.id === id)

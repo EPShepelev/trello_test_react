@@ -1,9 +1,9 @@
 import { FC } from "react";
-import {  ICloumn } from "../../types/types";
+import { IColumn } from "../../types/types";
 import { List } from "../List/List";
 
 interface BoardProps {
-  columns: ICloumn[]
+  columns: IColumn[]
   onColumTitleChange (index: number, title: string): void
   addCard (index: number, title: string, text: string): void
   editCard (listIndex: number, id: string, title: string, text: string): void

@@ -12,7 +12,7 @@ export interface ICard {
   comments: IComment[]
 }
 
-export interface ICloumn {
+export interface IColumn {
   listTitle: string
   cards: ICard[]
 }

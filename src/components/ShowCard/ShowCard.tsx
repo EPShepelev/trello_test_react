@@ -1,4 +1,4 @@
-import { useCallback, useEffect, FC } from "react";
+import { useEffect, FC } from "react";
 import { ICard } from "../../types/types";
 import {Comments} from '../Comments/Comments'
 import styles from "./ShowCard.module.css";
@@ -28,16 +28,18 @@ export const ShowCard: FC<ShowCardProps> = ({
   deleteComment
 }) => {
 
-  const escFunction = useCallback((e) => {
-    if (e.key === "Escape") {
-      onCloseBtnHandle()
-    }
-  }, []);
-
   useEffect(() => {
-    document.addEventListener("keydown", escFunction, false);
+    document.addEventListener("keydown", (e)=>{
+      if (e.key === "Escape") {
+        onCloseBtnHandle()
+      }
+    }, false);
     return () => {
-      document.removeEventListener("keydown", escFunction, false);
+      document.removeEventListener("keydown", (e)=>{
+        if (e.key === "Escape") {
+          onCloseBtnHandle()
+        }
+      }, false);
     };
   }, []);
 
